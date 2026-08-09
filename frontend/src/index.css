@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --color-primary: hsl(200, 80%, 55%);   /* teal */
+  --color-accent: #FFC845;               /* golden yellow */
+  --color-bg: #14171F;
+  --color-surface: hsla(0, 0%, 100%, 0.05);
+  --color-text: #F3F5F8;
+  --gradient-bg: linear-gradient(135deg, #0f172a, #1e1b4b);
+
+  /* Theme tokens */
+  --color-ink: #14171F;
+  --color-panel: #1D2130;
+  --color-panelLine: #2A2F42;
+  --color-savings: #2FD9A8;
+  --color-surge: #FF6B5E;
+  --color-muted: #8B92A4;
+  --color-paper: #F3F5F8;
+}
+
+[data-theme="light"] {
+  --color-primary: hsl(200, 80%, 45%);
+  --color-accent: #EAB308;
+  --color-bg: #F1F5F9;
+  --color-surface: hsla(0, 0%, 0%, 0.03);
+  --color-text: #0F172A;
+  --gradient-bg: linear-gradient(135deg, #F8FAFC, #E2E8F0);
+
+  /* Light theme tokens */
+  --color-ink: #F8FAFC;
+  --color-panel: #FFFFFF;
+  --color-panelLine: #E2E8F0;
+  --color-savings: #10B981;
+  --color-surge: #EF4444;
+  --color-muted: #64748B;
+  --color-paper: #0F172A;
+}
+
+html, body {
+  min-height: 100%;
+  font-family: 'Inter', sans-serif;
+  background: var(--gradient-bg);
+  background-attachment: fixed;
+  color: var(--color-text);
+}
+
+/* Smooth layout transition for theme toggling */
+html, body, .glass, header, footer, input, button, select, div, p, span, h1, h2, h3, a, svg, label {
+  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease, fill 0.4s ease, stroke 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Glass‑morphism container */
+.glass {
+  background: var(--color-surface);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-panelLine);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+  padding: .6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .3s, transform .2s;
+}
+.btn-primary:hover { background: var(--color-accent); transform: scale(1.05); }
+
+/* Input */
+.input {
+  background-color: var(--color-ink);
+  border: 1px solid var(--color-panelLine);
+  color: var(--color-paper);
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  width: 100%;
+  font-family: inherit;
+  outline: none;
+}
+.input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(255, 200, 69, 0.15);
+}
+
+/* Animations */
+@keyframes fade-up { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+.animate-fade-up { animation:fade-up 0.5s ease-out both; }
+
+@keyframes chopper-ride {
+  0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+  5% { transform: translate(0.5px, -0.5px) rotate(0.05deg); }
+  10% { transform: translate(-0.5px, 0.5px) rotate(-0.05deg); }
+  15% { transform: translate(0px, 0px) rotate(0deg); }
+  25% { transform: translate(-3px, -4px) rotate(-0.5deg); }
+  30% { transform: translate(-2.5px, -4.5px) rotate(-0.45deg); }
+  35% { transform: translate(-3.5px, -3.5px) rotate(-0.55deg); }
+  40% { transform: translate(-3px, -4px) rotate(-0.5deg); }
+  50% { transform: translate(0px, 1px) rotate(0.1deg); }
+  55% { transform: translate(0.5px, 0.5px) rotate(0.15deg); }
+  60% { transform: translate(-0.5px, 1.5px) rotate(0.05deg); }
+  65% { transform: translate(0px, 1px) rotate(0.1deg); }
+  75% { transform: translate(3px, -3px) rotate(0.4deg); }
+  80% { transform: translate(3.5px, -3.5px) rotate(0.45deg); }
+  85% { transform: translate(2.5px, -2.5px) rotate(0.35deg); }
+  90% { transform: translate(3px, -3px) rotate(0.4deg); }
+}
+.animate-chopper {
+  animation: chopper-ride 8s ease-in-out infinite;
+}
+
+/* 3D card flip */
+.card-flip { perspective: 1000px; }
+.card-flip-inner { position: relative; transform-style: preserve-3d; transition: transform 0.6s; }
+.card-flip:hover .card-flip-inner { transform: rotateY(180deg); }
+.card-flip-front, .card-flip-back { position: absolute; width: 100%; backface-visibility: hidden; border-radius: inherit; }
+.card-flip-back { transform: rotateY(180deg); }
+
+@media (prefers-reduced-motion: reduce) { .animate-fade-up { animation:none; } }
